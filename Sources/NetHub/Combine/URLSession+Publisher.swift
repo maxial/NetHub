@@ -1,6 +1,6 @@
 //
 //  URLSession+Publisher.swift
-//  Sandbox
+//  NetHub
 //
 //  Created by Maxim Aliev on 10.01.2023.
 //
@@ -10,9 +10,9 @@ import Combine
 
 extension URLSession {
     
-    typealias PublisherResult<T> = AnyPublisher<Result<T, NetworkError>, Never>
+    public typealias PublisherResult<T> = AnyPublisher<Result<T, NetworkError>, Never>
     
-    func publisher<T: Decodable>(endpoint: API, decoder: JSONDecoder = .init()) -> PublisherResult<T> {
+    public func publisher<T: Decodable>(endpoint: API, decoder: JSONDecoder = .init()) -> PublisherResult<T> {
         catchError {
             let urlRequest = try endpoint.asURLRequest()
             return dataTaskPublisher(for: urlRequest)

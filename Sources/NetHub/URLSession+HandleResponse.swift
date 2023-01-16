@@ -1,6 +1,6 @@
 //
 //  URLSession+HandleResponse.swift
-//  Sandbox
+//  NetHub
 //
 //  Created by Maxim Aliev on 16.01.2023.
 //

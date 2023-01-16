@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     
     case GET
     case POST
@@ -15,13 +15,13 @@ enum HTTPMethod: String {
     case DELETE
 }
 
-enum HTTPScheme: String {
+public enum HTTPScheme: String {
     
     case http
     case https
 }
 
-protocol API {
+public protocol API {
     
     var method: HTTPMethod { get }
     var scheme: HTTPScheme { get }

@@ -1,6 +1,6 @@
 //
 //  URLSession.swift
-//  Sandbox
+//  NetHub
 //
 //  Created by Maxim Aliev on 15.01.2023.
 //
@@ -9,7 +9,7 @@ import Foundation
 
 extension URLSession {
     
-    func request<T: Decodable>(
+    public func request<T: Decodable>(
         endpoint: API,
         decoder: JSONDecoder = .init(),
         completion: @escaping (Result<T, NetworkError>) -> Void

@@ -1,13 +1,13 @@
 //
 //  NetworkError.swift
-//  Sandbox
+//  NetHub
 //
 //  Created by Maxim Aliev on 10.01.2023.
 //
 
 import Foundation
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     
     case invalidURL(String)
     case transportError(URLError)
@@ -51,7 +51,7 @@ enum NetworkError: Error {
 
 extension NetworkError: LocalizedError {
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .invalidURL(let urlString):
             return "URL creation error. API path \(urlString)."
