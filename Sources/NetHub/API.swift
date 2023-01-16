@@ -30,9 +30,6 @@ public protocol API {
     var parameters: [URLQueryItem] { get }
     var headers: [String: String]? { get }
     var body: Data? { get }
-    
-    func asURL() throws -> URL
-    func asURLRequest() throws -> URLRequest
 }
 
 extension API {
