@@ -1,16 +1,16 @@
 //
 //  NetworkError.swift
-//  NetHub
+//  
 //
 //  Created by Maxim Aliev on 10.01.2023.
 //
 
 import Foundation
 
-public enum NetworkError: Error {
+public enum NetworkError: Error, Equatable {
     
     case invalidURL(String)
-    case transportError(URLError)
+    case transportError(String)
     case noData
     case invalidResponse
     
@@ -24,8 +24,8 @@ public enum NetworkError: Error {
     // 5xx
     case serverError(statusCode: Int)
     
-    case decodingError(Error)
-    case unknown(Error)
+    case decodingError(String)
+    case unknown(String)
     
     static func by(httpStatusCode: Int) -> NetworkError {
         switch httpStatusCode {
@@ -44,7 +44,7 @@ public enum NetworkError: Error {
         case 500...599:
             return .serverError(statusCode: httpStatusCode)
         default:
-            return .unknown(NSError(domain: "com.maxial.sandbox", code: httpStatusCode))
+            return .unknown("Unknown error with status code \(httpStatusCode).")
         }
     }
 }
@@ -91,9 +91,9 @@ extension Error {
         if let networkError = self as? NetworkError {
             return networkError
         } else if let urlError = self as? URLError {
-            return .transportError(urlError)
+            return .transportError(urlError.localizedDescription)
         } else {
-            return .unknown(self)
+            return .unknown(self.localizedDescription)
         }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  URLSession+Publisher.swift
-//  NetHub
+//  
 //
 //  Created by Maxim Aliev on 10.01.2023.
 //
@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
+public typealias PublisherResult<T> = AnyPublisher<Result<T, NetworkError>, Never>
+
 extension URLSession {
-    
-    public typealias PublisherResult<T> = AnyPublisher<Result<T, NetworkError>, Never>
     
     public func publisher<T: Decodable>(endpoint: API, decoder: JSONDecoder = .init()) -> PublisherResult<T> {
         catchError {

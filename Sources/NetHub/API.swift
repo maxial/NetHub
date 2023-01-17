@@ -1,6 +1,6 @@
 //
 //  API.swift
-//  InterviewPreparation
+//  
 //
 //  Created by Maxim Aliev on 07.01.2023.
 //

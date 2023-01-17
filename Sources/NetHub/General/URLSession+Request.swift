@@ -1,6 +1,6 @@
 //
-//  URLSession.swift
-//  NetHub
+//  URLSession+Request.swift
+//  
 //
 //  Created by Maxim Aliev on 15.01.2023.
 //

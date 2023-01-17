@@ -1,6 +1,6 @@
 //
-//  DataDecoder.swift
-//  NetHub
+//  JSONDecoder+Parse.swift
+//  
 //
 //  Created by Maxim Aliev on 15.01.2023.
 //
@@ -13,7 +13,7 @@ extension JSONDecoder {
         do {
             return try decode(T.self, from: data)
         } catch {
-            throw NetworkError.decodingError(error)
+            throw NetworkError.decodingError(error.localizedDescription)
         }
     }
 }

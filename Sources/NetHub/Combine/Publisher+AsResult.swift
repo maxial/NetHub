@@ -1,6 +1,6 @@
 //
 //  Publisher+AsResult.swift
-//  NetHub
+//  
 //
 //  Created by Maxim Aliev on 15.01.2023.
 //
