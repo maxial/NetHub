@@ -14,7 +14,7 @@ final class NetHubTests: XCTestCase {
         let result = try awaitCompletion(of: publisher)
         XCTAssertEqual(result, [Profile.MockDataURLResponder.profileResult])
     }
-//    
+
 //    func testSuccessfullyPerformingGeneralRequest() throws {
 //        let urlSession = URLSession(mockResponder: Profile.MockDataURLResponder.self)
 //        let publisher: PublisherResult<Profile> = urlSession.publisher(
