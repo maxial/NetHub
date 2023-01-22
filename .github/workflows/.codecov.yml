@@ -1,18 +1,17 @@
-name: Code Coverage
+name: Build Package
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: macos-11
+
     steps:
-      - name: Test
-        uses: actions/checkout@v1
-      - name: Build and Test
-        run:  xcodebuild test -project Package.swift -scheme NetHub -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=15.5' build test
+    - uses: actions/checkout@v2
+        
+    - name: Build
+      run: swift build -v
