@@ -9,7 +9,11 @@ import Foundation
 
 extension URLSession {
     
-    public func request<T: Decodable>(endpoint: API, decoder: JSONDecoder = .init(), completion: @escaping (Result<T, NetworkError>) -> Void) {
+    public func request<T: Decodable>(
+        endpoint: API,
+        decoder: JSONDecoder = .init(),
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
         do {
             let urlRequest = try endpoint.asURLRequest()
             

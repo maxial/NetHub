@@ -1,5 +1,5 @@
 //
-//  ProfileAPI.swift
+//  MockAPIs.swift
 //  
 //
 //  Created by Maxim Aliev on 16.01.2023.
@@ -8,7 +8,7 @@
 import Foundation
 @testable import NetHub
 
-enum ProfileAPI: API {
+enum MockAPIs: API {
     
     case getProfile(name: String, age: Int)
     
@@ -50,7 +50,7 @@ enum ProfileAPI: API {
         return params
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         switch self {
         case .getProfile:
             return ["Content-Type": "application/json"]
@@ -60,4 +60,10 @@ enum ProfileAPI: API {
     var body: Data? {
         return nil
     }
+}
+
+struct Profile: Codable, Equatable {
+    
+    var name: String
+    var age: Int
 }

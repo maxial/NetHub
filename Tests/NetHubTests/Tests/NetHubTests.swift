@@ -3,34 +3,37 @@ import XCTest
 
 final class NetHubTests: XCTestCase {
     
-    func testSuccessfullyPerformingRequest() throws {
-        let urlSession = URLSession(mockResponder: Profile.MockDataURLResponder.self)
+    func testSuccessfullyPerformingPublisherRequest() throws {
+        let urlSession = URLSession(mockResponder: MockProfileURLResponder.self)
         let publisher: PublisherResult<Profile> = urlSession.publisher(
-            endpoint: ProfileAPI.getProfile(
-                name: Profile.MockDataURLResponder.profile.name,
-                age: Profile.MockDataURLResponder.profile.age
+            endpoint: MockAPIs.getProfile(
+                name: MockProfileURLResponder.profile.name,
+                age: MockProfileURLResponder.profile.age
             )
         )
         let result = try awaitCompletion(of: publisher)
-        XCTAssertEqual(result, [Profile.MockDataURLResponder.profileResult])
+        
+        XCTAssertEqual(result, [MockProfileURLResponder.profileResult])
     }
-
-//    func testSuccessfullyPerformingGeneralRequest() throws {
-//        let urlSession = URLSession(mockResponder: Profile.MockDataURLResponder.self)
-//        let publisher: PublisherResult<Profile> = urlSession.publisher(
-//            endpoint: ProfileAPI.getProfile(
-//                name: Profile.MockDataURLResponder.profile.name,
-//                age: Profile.MockDataURLResponder.profile.age
-//            )
-//        )
-//
-//        urlSession.request(endpoint: ProfileAPI.getProfile(
-//            name: Profile.MockDataURLResponder.profile.name,
-//            age: Profile.MockDataURLResponder.profile.age
-//        )) { <#Result<Decodable, NetworkError>#> in
-//            <#code#>
-//        }
-//        let result = try awaitCompletion(of: publisher)
-//        XCTAssertEqual(result, [Profile.MockDataURLResponder.profileResult])
-//    }
+    
+    func testSuccessfullyPerformingGeneralRequest() throws {
+        let urlSession = URLSession(mockResponder: MockProfileURLResponder.self)
+        var profileResult: Result<Profile, NetworkError>?
+        
+        let exp = expectation(description: "General Request")
+        
+        urlSession.request(
+            endpoint: MockAPIs.getProfile(
+                name: MockProfileURLResponder.profile.name,
+                age: MockProfileURLResponder.profile.age
+            )
+        ) { (result: Result<Profile, NetworkError>) in
+            profileResult = result
+            exp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1)
+        
+        XCTAssertEqual(profileResult, MockProfileURLResponder.profileResult)
+    }
 }
