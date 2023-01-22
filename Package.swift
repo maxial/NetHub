@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "NetHub",
     platforms: [
-        .macOS(.v10_15), .iOS(.v15)
+        .macOS(.v12), .iOS(.v15)
     ],
     products: [
         .library(name: "NetHub", targets: ["NetHub"]),
