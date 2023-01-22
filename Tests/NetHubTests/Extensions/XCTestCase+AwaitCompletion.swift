@@ -14,14 +14,14 @@ extension XCTestCase {
         of publisher: P,
         timeout: TimeInterval = 10
     ) throws -> [P.Output] {
-        let expectation = self.expectation(description: "Awaiting publisher completion")
+        let exp = expectation(description: "Awaiting publisher completion")
         
         var completion: Subscribers.Completion<P.Failure>?
         var output: [P.Output] = []
         
         let cancellable = publisher.sink {
             completion = $0
-            expectation.fulfill()
+            exp.fulfill()
         } receiveValue: {
             output.append($0)
         }
