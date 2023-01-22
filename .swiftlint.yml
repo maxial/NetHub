@@ -1,0 +1,18 @@
+disabled_rules:
+    - trailing_whitespace
+
+type_name:
+    min_length: 2
+    max_length:
+        error: 40
+
+identifier_name:
+    min_length: 2
+    max_length:
+        error: 40
+
+line_length: 110
+
+type_body_length:
+    warning: 300
+    error: 400
