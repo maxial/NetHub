@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import NetHub
 
 final class MockURLProtocol<Responder: MockURLResponder>: URLProtocol {
     
@@ -21,18 +22,17 @@ final class MockURLProtocol<Responder: MockURLResponder>: URLProtocol {
         guard let client = client else { return }
         
         do {
-            let data = try Responder.respond(to: request)
-            let response = try XCTUnwrap(
-                HTTPURLResponse(
-                    url: XCTUnwrap(request.url),
-                    statusCode: 200,
-                    httpVersion: "HTTP/1.1",
-                    headerFields: nil
-                )
-            )
+            let httpResponse = try Responder.respond(to: request)
             
-            client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-            client.urlProtocol(self, didLoad: data)
+            if let response = httpResponse.response {
+                client.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            } else {
+                throw NetworkError.invalidResponse
+            }
+            
+            if let data = httpResponse.body {
+                client.urlProtocol(self, didLoad: data)
+            }
         } catch {
             client.urlProtocol(self, didFailWithError: error)
         }

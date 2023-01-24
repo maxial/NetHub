@@ -10,32 +10,33 @@ import Foundation
 
 enum MockAPIs: API {
     
+    case stub
     case getProfile(name: String, age: Int)
     
     var method: HTTPMethod {
         switch self {
-        case .getProfile:
+        case .stub, .getProfile:
             return .GET
         }
     }
     
     var scheme: HTTPScheme {
         switch self {
-        case .getProfile:
+        case .stub, .getProfile:
             return .https
         }
     }
     
     var baseURL: String {
         switch self {
-        case .getProfile:
+        case .stub, .getProfile:
             return "httpbin.org"
         }
     }
     
     var path: String {
         switch self {
-        case .getProfile:
+        case .stub, .getProfile:
             return "/get"
         }
     }
@@ -43,6 +44,8 @@ enum MockAPIs: API {
     var parameters: [URLQueryItem] {
         var params: [URLQueryItem] = []
         switch self {
+        case .stub:
+            break
         case let .getProfile(name, age):
             params.append(URLQueryItem(name: "name", value: name))
             params.append(URLQueryItem(name: "age", value: "\(age)"))
@@ -52,7 +55,7 @@ enum MockAPIs: API {
     
     var headers: [String: String]? {
         switch self {
-        case .getProfile:
+        case .stub, .getProfile:
             return ["Content-Type": "application/json"]
         }
     }
@@ -60,10 +63,4 @@ enum MockAPIs: API {
     var body: Data? {
         return nil
     }
-}
-
-struct Profile: Codable, Equatable {
-    
-    var name: String
-    var age: Int
 }
